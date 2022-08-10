@@ -9,7 +9,6 @@ class Hangman:
     '''
     A Hangman Game that asks the user for a letter and checks if it is in the word.
     It starts with a default number of lives and a random word from the word_list.
-
     
     Parameters:
     ----------
@@ -32,7 +31,6 @@ class Hangman:
         The number of lives the player has
     list_letters: list
         A list of the letters that have already been tried
-
     Methods:
     -------
     check_letter(letter)
@@ -41,23 +39,32 @@ class Hangman:
         Asks the user for a letter.
     '''
     def __init__(self, word_list, num_lives=5):
-        # TODO 2: Initialize the attributes as indicated in the docstring
-        # TODO 2: Print two message upon initialization:
-        # 1. "The mystery word has {len(self.word)} characters" (The number of letters is NOT the UNIQUE number of letters)
-        # 2. {word_guessed}
+                            
+                                    #todo 2#
+        self.word_list = word_list
+        self.num_lives = num_lives
+        self.word = random.choice(word_list) #pick a word from the list
+        self.num_letters = int()
+        self.list_letters = []
+        word_guessed = [] #start with a blank list to append 
+        for l in range(len(self.word)):
+            word_guessed.append('_') 
+            
+        print(f"The mystery word has {len(self.word)} characters") 
+        print(f'{word_guessed}')
         pass
+                                    #todo 2#
+
 
     def check_letter(self, letter) -> None:
         '''
         Checks if the letter is in the word.
         If it is, it replaces the '_' in the word_guessed list with the letter.
         If it is not, it reduces the number of lives by 1.
-
         Parameters:
         ----------
         letter: str
             The letter to be checked
-
         '''
         # TODO 3: Check if the letter is in the word. TIP: You can use the lower() method to convert the letter to lowercase
         # TODO 3: If the letter is in the word, replace the '_' in the word_guessed list with the letter
@@ -75,14 +82,19 @@ class Hangman:
         '''
         while True:
             letter = input('Please enter letter: ')
-            if len(letter) >1:
-                print("Please, enter just one character")
+            if letter in self.list_letters:
+                print(f'{letter} was already tried')
+            else:
+                if len(letter) >1:
+                    print("You entered too many characters. Please, enter just one character.") 
+                else: 
+                    self.list_letters.append(letter)
+                    print(f'Great job, you guessed {letter} which is a new guess.') 
+                    print(f'So far you have guessed the following letters: {self.list_letters}')    
+
+                    print('\nlets see if it is a correct guess........')
+                    print('checking........')
             
-            
-        # TODO 1: Ask the user for a letter iteratively until the user enters a valid letter
-        # TODO 1: Assign the letter to a variable called `letter`
-        # TODO 1: The letter has to comply with the following criteria: It has to be a single character. If it is not, print "Please, enter just one character"
-        # TODO 2. It has to be a letter that has not been tried yet. Use the list_letters attribute to check this. If it has been tried, print "{letter} was already tried".
         # TODO 3: If the letter is valid, call the check_letter method
         pass
 
@@ -90,8 +102,6 @@ def play_game(word_list):
     # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
     game.ask_letter()
-    # TODO 1: To test this task, you can call the ask_letter method
-    # TODO 2: To test this task, upon initialization, two messages should be printed 
     # TODO 3: To test this task, you call the ask_letter method and check if the letter is in the word
     
     # TODO 4: Iteratively ask the user for a letter until the user guesses the word or runs out of lives
@@ -104,4 +114,3 @@ if __name__ == '__main__':
     word_list = ['apple', 'banana', 'orange', 'pear', 'strawberry', 'watermelon']
     play_game(word_list)
 # %%
-
