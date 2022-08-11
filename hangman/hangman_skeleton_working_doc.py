@@ -12,8 +12,9 @@ class Hangman:
         self.num_letters = int()
         self.list_letters = []
         self.word_guessed = ['_'] * len(self.word)
-        print(f"The mystery word {(self.word)}, has {len(self.word)} characters") 
-        print(f'Var word_guessed = {self.word_guessed}')
+
+        print(f"The mystery word {(self.word)}, has {len(self.word)} characters") #print how long the word is
+        print(f'{self.word_guessed}') #print the word in underscores eg, ['_ _ _ _']
         pass
 
 
@@ -26,7 +27,7 @@ class Hangman:
                         self.word_guessed[x] = (letter) #replace the underscore of the 
 
 
-        print(self.word_guessed)
+        print(f'{self.word_guessed}')
         pass
 
 
@@ -35,24 +36,24 @@ class Hangman:
 
         while True:
             letter = input('Please enter a letter: ')
-
+            letter = letter.lower()
             if letter in self.list_letters:
-                print(f'{letter} was already tried')
+                print(f'The letter {letter} was already tried')
 
             else:
                 if len(letter) !=1:
-                    print("Please, enter just one letter when guessing. Try again: ") 
+                    print("Not quite right.. Please, enter one letter when guessing. Try again: ") 
 
                 else: 
                     if letter.lower() in self.word:
-                        self.check_letter(letter)
                         self.list_letters.append(letter)
-                        print(f'Great job, you guessed {letter} which is a correct guess.') 
+                        print(f'Great job, you guessed the letter {letter} which is a correct guess.') 
                         print(f'So far you have guessed the following letters: {self.list_letters}') 
+                        self.check_letter(letter)
 
                     else:
                         self.list_letters.append(letter)
-                        print(f'Sorry, you guessed {letter} which is not a correct letter.') 
+                        print(f'Hard luck! You guessed {letter} which is not a correct letter.') 
                         print(f'So far you have guessed the following letters: {self.list_letters}')    
 
         pass
