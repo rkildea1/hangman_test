@@ -17,14 +17,9 @@ class Hangman:
         print(f"The mystery word has {len(self.word)} characters") #print how long the word is
         print(f'{self.word_guessed}') #print the word in underscores eg, ['_ _ _ _']
 
-        # TODO This pass can be removed
-        pass
 
 
     def check_letter(self, letter):
-        # TODO Remove these two variables (alphabet and alphabetList). You are not using them
-        alphabet = list('abcdefghijklmnopqrstuvwxyz')
-        alphabetList = []
         for x,y in enumerate(self.word): # x = the index of the string, y = the corresponding letter of the hangmanword
             if letter == y: #if the guess is equal to a letter in the hangmanword
                 for a,b in enumerate(self.word_guessed):# a = the index of the list, b = the corresponding underscore of the blankword [_ _ _ _]
@@ -64,8 +59,7 @@ class Hangman:
                             # print(f'you have {self.num_lives} lives left')
                             print(self.word_guessed)
 
-                # TODO This continue can be removed, it's redundant
-                continue
+
             else:
                 if self.num_lives<1:
                     print(f'You ran out of lives. The word was {self.word}')
