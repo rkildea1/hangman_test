@@ -1,4 +1,5 @@
 
+from os import lseek
 import random
 
 class Hangman:
@@ -19,7 +20,6 @@ class Hangman:
 
 
     def check_letter(self, letter):
-
         alphabet = list('abcdefghijklmnopqrstuvwxyz')
         alphabetList = []
         for x,y in enumerate(self.word): # x = the index of the string, y = the corresponding letter of the hangmanword
@@ -28,43 +28,49 @@ class Hangman:
                     if a == x: # where the index of the underscore list is equal to the index of the letter in the hangman word..
                         self.word_guessed[x] = (letter) #replace the underscore of the 
         print(self.word_guessed)
+
         
+
              
 
     def ask_letter(self):
 
-        while self.num_lives>0:
-            letter = input('Please enter a letter: ')
-            letter = letter.lower()
-            if len(letter) !=1:
-                    self.num_lives -= 1
-                    print("Please, enter just one character")
-            else:    
-                if letter in self.list_letters:
-                    print(f'"{letter} was already tried"')
-                else: 
-                    if letter in self.word:
-                        self.list_letters.append(letter)
-                        print(f'Great job, you guessed the letter {letter} which is a correct guess.') 
-                        print(f'So far you have guessed the following letters: {self.list_letters}') 
-                        self.check_letter(letter) 
-                    else:
+            while self.num_lives>0 and '_' in self.word_guessed:
+                print(f'you have {self.num_lives} lives left')
+                letter = input('Please enter a letter: ')
+                letter = letter.lower()
+                if len(letter) !=1:
                         self.num_lives -= 1
-                        self.list_letters.append(letter)
-                        print(f'Hard luck! You guessed {letter} which is not a correct letter.') 
-                        print(f'So far you have guessed the following letters: {self.list_letters}') 
-                        print(f'you have {self.num_lives} lives left')
-                        print(self.word_guessed)
-        else:
-            print(f'You ran out of lives. The word was {self.word}')
-        pass
+                        print("Please, enter just one character")
+                else:    
+                    if letter in self.list_letters:
+                        print(f'"{letter} was already tried"')
+                    else: 
+                        if letter in self.word:
+                            self.list_letters.append(letter)
+                            # print(f'Great job, you guessed the letter {letter} which is a correct guess.') 
+                            print(f'So far you have guessed the following letters: {self.list_letters}') 
+                            self.check_letter(letter) 
+                        else:
+                            self.num_lives -= 1
+                            self.list_letters.append(letter)
+                            print(f'Hard luck! You guessed {letter} which is not a correct letter.') 
+                            # print(f'you have {self.num_lives} lives left')
+                            print(self.word_guessed)
+                continue
+            else:
+                if self.num_lives<1:
+                    print(f'You ran out of lives. The word was {self.word}')
+                else:
+                    print('Congratulations, you won!')
+
+        
         
 
 
 def play_game(word_list):
     game = Hangman(word_list, num_lives=5)
     game.ask_letter()
-    
     pass
 
 if __name__ == '__main__':
