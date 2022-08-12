@@ -78,7 +78,7 @@ class Hangman:
 
 def play_game(word_list):
     game = Hangman(word_list, num_lives=5)
-    # TODO As mentioned in line 39, the while loop should be here
+    # TODO As mentioned in line 40, the while loop should be here
     # TODO Something like: 
     # TODO while game.num_lives > 0 and '_' in game.word_guessed:
     # TODO      game.ask_letter()
