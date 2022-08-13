@@ -49,14 +49,12 @@ class Hangman:
                     else: 
                         if letter in self.word:
                             self.list_letters.append(letter)
-                            # print(f'Great job, you guessed the letter {letter} which is a correct guess.') 
                             print(f'So far you have guessed the following letters: {self.list_letters}') 
                             self.check_letter(letter) 
                         else:
                             self.num_lives -= 1
                             self.list_letters.append(letter)
                             print(f'Hard luck! You guessed {letter} which is not a correct letter.') 
-                            # print(f'you have {self.num_lives} lives left')
                             print(self.word_guessed)
 
 
